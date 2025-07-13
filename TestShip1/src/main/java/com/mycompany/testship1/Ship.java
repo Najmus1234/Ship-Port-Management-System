@@ -12,4 +12,5 @@ public class Ship {
     double weight;
     double length;
     int people;
+    int number;
 }
