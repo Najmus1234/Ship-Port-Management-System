@@ -13,4 +13,5 @@ public class Ship {
     double length;
     int people;
     int number;
+    String name;
 }
