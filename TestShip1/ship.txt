@@ -1,0 +1,2 @@
+Name: SS, ID: 242, Type: Cargo, Fuel Capacity: 23L, Crew: 43
+Name: Osman, ID: 353, Type: Oil Tanker, Fuel Capacity: 49L, Crew: 12

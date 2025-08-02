@@ -8,6 +8,11 @@ package com.mycompany.testship1;
  *
  * @author User
  */
-public class Ship {
-    id, type, fuelCapacity, fuelRemaining, crewCount
+public class Crew {
+
+    name, id, title, age
+
+    
+}
+
 }
