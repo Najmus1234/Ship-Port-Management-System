@@ -1,14 +1,20 @@
+package com.mycompany.testship1;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class GUICrewShip extends JFrame {
+
     private ArrayList<Crew> crewList = new ArrayList<>();
     private ArrayList<Ship> shipList = new ArrayList<>();
     private boolean firstCrewWrite = true;
     private boolean firstShipWrite = true;
+    private JTextArea textArea;
 
     public GUICrewShip() {
         setTitle("NOUKA Ship Port Management");
@@ -22,11 +28,15 @@ public class GUICrewShip extends JFrame {
         tabs.add("Home", new JLabel("Welcome to the NOUKA Ship Port Management System!", SwingConstants.CENTER));
 
         // View tab
-        tabs.add("View", new JLabel("Viewing options will be added here."));
+        tabs.add("View", createViewPanel());
 
         // Manage tab
         tabs.add("Manage", createManagePanel());
-        
+
+        //Fuel tab
+        tabs.add("Fuel", createFuelPanel());
+
+        //tabs.add("Map", createMapPanel());
         tabs.add("About", new JLabel("CSE215.9 Java Project by Group 2. \\nMembers: Nafis Alam Nihal, Dewan Najmus Saqib, Aowlad Hussain"));
 
         add(tabs);
@@ -42,37 +52,25 @@ public class GUICrewShip extends JFrame {
         buttonPanel.add(crewBtn);
         buttonPanel.add(shipBtn);
 
-        JPanel crewForm = new JPanel(new GridLayout(5, 2));
+        JPanel crewForm = new JPanel(new GridLayout(6, 2));
         JTextField crewName = new JTextField();
         JTextField crewID = new JTextField();
-        JTextField crewTitle = new JTextField();
-        JTextField crewAge = new JTextField();
-        JButton submitCrew = new JButton("Submit Crew");
+        
 
         crewForm.setBorder(BorderFactory.createTitledBorder("Crew Info"));
-        crewForm.add(new JLabel("Name:")); crewForm.add(crewName);
-        crewForm.add(new JLabel("ID:")); crewForm.add(crewID);
-        crewForm.add(new JLabel("Title:")); crewForm.add(crewTitle);
-        crewForm.add(new JLabel("Age:")); crewForm.add(crewAge);
-        crewForm.add(new JLabel("")); crewForm.add(submitCrew);
-        crewForm.setVisible(false);
-
+        crewForm.add(new JLabel("Name:"));
+        crewForm.add(crewName);
+        crewForm.add(new JLabel("ID:"));
+        crewForm.add(crewID);
+        
         JPanel shipForm = new JPanel(new GridLayout(6, 2));
         JTextField shipID = new JTextField();
-        JTextField shipType = new JTextField();
-        JTextField fuelCap = new JTextField();
-        JTextField fuelRem = new JTextField();
-        JTextField crewNum = new JTextField();
-        JButton submitShip = new JButton("Submit Ship");
+        
 
         shipForm.setBorder(BorderFactory.createTitledBorder("Ship Info"));
-        shipForm.add(new JLabel("ID:")); shipForm.add(shipID);
-        shipForm.add(new JLabel("Type:")); shipForm.add(shipType);
-        shipForm.add(new JLabel("Fuel Capacity:")); shipForm.add(fuelCap);
-        shipForm.add(new JLabel("Fuel Remaining:")); shipForm.add(fuelRem);
-        shipForm.add(new JLabel("Crew Count:")); shipForm.add(crewNum);
-        shipForm.add(new JLabel("")); shipForm.add(submitShip);
-        shipForm.setVisible(false);
+        shipForm.add(new JLabel("ID:"));
+        shipForm.add(shipID);
+        
 
         // Button actions using ActionListener (no lambdas)
         crewBtn.addActionListener(new ActionListener() {
@@ -93,30 +91,23 @@ public class GUICrewShip extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String name = crewName.getText();
                 String id = crewID.getText();
-                String title = crewTitle.getText();
-                int age = Integer.parseInt(crewAge.getText());
+                
 
-                Crew c = new Crew(name, id, title, age);
+                Crew c = new Crew(name, id, shipId, title, age);
                 crewList.add(c);
                 writeCrewToFile(c);
                 JOptionPane.showMessageDialog(null, "Crew saved.");
-                crewName.setText(""); crewID.setText(""); crewTitle.setText(""); crewAge.setText("");
+                crewName.setText("");
+                crewID.setText("");
+                
             }
         });
 
         submitShip.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String id = shipID.getText();
-                String type = shipType.getText();
-                double cap = Double.parseDouble(fuelCap.getText());
-                double rem = Double.parseDouble(fuelRem.getText());
-                int crew = Integer.parseInt(crewNum.getText());
-
-                Ship s = new Ship(id, type, cap, rem, crew);
-                shipList.add(s);
-                writeShipToFile(s);
-                JOptionPane.showMessageDialog(null, "Ship saved.");
-                shipID.setText(""); shipType.setText(""); fuelCap.setText(""); fuelRem.setText(""); crewNum.setText("");
+                
+                
             }
         });
 
@@ -131,28 +122,81 @@ public class GUICrewShip extends JFrame {
 
     private void writeCrewToFile(Crew c) {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("crew.txt", !firstCrewWrite));
-            bw.write(c.toString());
-            bw.newLine();
-            bw.close();
+            FileWriter fw = new FileWriter("crew.txt", !firstCrewWrite);
+            fw.write(c.toString() + "\n");
+            fw.close();
             firstCrewWrite = false;
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Error writing crew: " + ex.getMessage());
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error writing crew: " + e.getMessage());
         }
     }
 
     private void writeShipToFile(Ship s) {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("ship.txt", !firstShipWrite));
-            bw.write(s.toString());
-            bw.newLine();
-            bw.close();
+            FileWriter fw = new FileWriter("ship.txt", !firstShipWrite);
+            fw.write(s.toString() + "\n");
+            fw.close();
             firstShipWrite = false;
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Error writing ship: " + ex.getMessage());
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this, "Error writing ship: " + e.getMessage());
         }
     }
 
+    private JPanel createViewPanel() {
+        JPanel mainPanel = new JPanel(new BorderLayout());
+
+        JPanel buttonPanel = new JPanel(new FlowLayout());
+        JButton btnShowCrew = new JButton("Show Crew File");
+        JButton btnShowShip = new JButton("Show Ship File");
+        JButton btnShowSample1 = new JButton("Entries Yesterday");
+
+        buttonPanel.add(btnShowCrew);
+        buttonPanel.add(btnShowShip);
+        buttonPanel.add(btnShowSample1);
+
+        textArea = new JTextArea();
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
+
+        mainPanel.add(buttonPanel, BorderLayout.NORTH);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
+
+        btnShowCrew.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                displayFileContent("crew.txt");
+            }
+        });
+
+        btnShowShip.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                displayFileContent("ship.txt");
+            }
+        });
+
+        btnShowSample1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                displayFileContent("Entries Yesterday(Sample).txt");
+            }
+        });
+        return mainPanel;
+    }
+
+    private void displayFileContent(String filename) {
+        try {
+            FileReader reader = new FileReader(filename);
+            Scanner scanner = new Scanner(reader);
+            StringBuilder content = new StringBuilder();
+            while (scanner.hasNextLine()) {
+                content.append(scanner.nextLine()).append("\n");
+            }
+            scanner.close();
+            textArea.setText(content.toString());
+        } catch (FileNotFoundException ex) {
+            textArea.setText(filename + " not found.");
+        }
+    }
+
+   
     public static void main(String[] args) {
         new GUICrewShip();
     }

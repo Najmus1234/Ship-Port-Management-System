@@ -10,8 +10,7 @@ package com.mycompany.testship1;
  */
 public class Crew {
 
-    name, id, title, age
-
+    name, id, shipId, title, age
     
 }
 
