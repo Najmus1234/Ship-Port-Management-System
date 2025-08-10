@@ -9,5 +9,5 @@ package com.mycompany.testship1;
  * @author 603.16.IP207
  */
 public class Tanker {
-    String substanceType;
+    String substance;
 }
