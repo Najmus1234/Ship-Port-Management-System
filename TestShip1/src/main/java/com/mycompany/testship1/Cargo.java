@@ -6,11 +6,13 @@ package com.mycompany.testship1;
 
 /**
  *
- * @author User
+ * @author 603.16.IP207
  */
-public class Ship {
-    id, type, fuelCapacity, fuelRemaining, crewCount, 
-            
-            do all methods here
-                    
+public class Cargo {
+    String good;
+    Cargo(String id, String, Stringgood)
+    {
+        super(id, );
+        
+    }
 }
