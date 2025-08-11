@@ -8,7 +8,7 @@ package com.mycompany.testship1;
  * @author nafis
  */
 
-public abstract class Ship{
+public abstract class Ship implements FuelOperations{
     private String shipName, shipCompany, registrationID, captain, country, shipStatus, dockAssigned;
     private int totalCrew;
     private double fuelCapacity, fuelRemained, weightCapacity, currentWeight;
@@ -141,5 +141,30 @@ public abstract class Ship{
     }
 
     
+    @Override
+    public double getFuelPercentage(){
+       return   (fuelRemained/fuelCapacity)*100;       
+    }
+    @Override
+    public void showFuelPercentage(){
+          System.out.println("Current Fuel Level: "+getFuelPercentage());
+}
+    @Override
+    public boolean isFuelTankFull(){
+        return fuelCapacity==fuelRemained;
+    }
+    
+    @Override
+    public void addFuel(double amount){
+        fuelRemained+=amount;
+    }
+    @Override
+    public double calculateFuelCost(double amount, double costPerLiter){
+        return amount*costPerLiter;
+    }
+    @Override
+    public void showFuelCost(double amount, double costPerLiter){
+        System.out.println("Fuel Cost: "+calculateFuelCost(amount, costPerLiter));
+    }
 }
 
