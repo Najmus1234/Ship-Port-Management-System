@@ -8,10 +8,34 @@ package com.mycompany.testship1;
  *
  * @author User
  */
-public class Crew {
+public class Crew extends Person{
 
-    name, id, shipId, title, age
+    private String shipAssigned;  
+    private boolean onDuty;          
+
+    public Crew(String shipAssigned, boolean onDuty, String name, String id, String role, int age, double salary) {
+        super(name, id, role, age, salary);
+        this.shipAssigned = shipAssigned;
+        this.onDuty = onDuty;
+    }
+
+    public String getShipAssigned() {
+        return shipAssigned;
+    }
+
+    public void setShipAssigned(String shipAssigned) {
+        this.shipAssigned = shipAssigned;
+    }
+
+    public boolean isOnDuty() {
+        return onDuty;
+    }
+
+    public void setOnDuty(boolean onDuty) {
+        this.onDuty = onDuty;
+    }
+
     
-}
+    
 
 }
