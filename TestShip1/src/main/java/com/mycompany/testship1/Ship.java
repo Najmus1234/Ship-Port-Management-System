@@ -3,13 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.testship1;
-
+/**
+ *
+ * @author nafis
+ */
 
 public abstract class Ship{
     private String shipName, shipCompany, registrationID, captain, country, shipStatus, dockAssigned;
     private int totalCrew;
     private double fuelCapacity, fuelRemained, weightCapacity, currentWeight;
-    
+      
     /**
      *
      * @param shipName
