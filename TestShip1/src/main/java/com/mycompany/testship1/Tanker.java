@@ -8,6 +8,6 @@ package com.mycompany.testship1;
  *
  * @author 603.16.IP207
  */
-public class Tanker {
-    String substance;
+public class TankerShip extends Ship {
+    
 }
