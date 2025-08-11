@@ -9,9 +9,12 @@ package com.mycompany.testship1;
  * @author 603.16.IP207
  */
 public class Interface1 {
-    get set methods
-            boolean Refill()
-                    dock(
-            )
-            undock
+    
+    
+    
+//    get set methods
+//            boolean Refill()
+//                    dock(
+//            )
+//            undock
 }
