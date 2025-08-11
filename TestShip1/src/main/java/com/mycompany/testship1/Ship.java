@@ -13,6 +13,7 @@ public abstract class Ship{
     private int totalCrew;
     private double fuelCapacity, fuelRemained, weightCapacity, currentWeight;
       
+    
     /**
      *
      * @param shipName
