@@ -9,15 +9,15 @@ package com.mycompany.testship1;
  * @author nafis
  */
 public interface FuelOperations {
-    boolean isFuelTankFull();
-   // void refilled();
+    void isFuelTankFull();
+    void refilled();
     void addFuel(double amount);
     double getFuelPercentage();
     void showFuelPercentage();
     double calculateFuelCost(double amount, double costPerLiter);
     void showFuelCost(double amount, double costPerLiter);
-    double fuelRequired();
-    void showfuelRequired();
+    double fuelRequiredToFill();
+    void findRequiredFuel(double distanceInKm, double fuelPerKm);
     
-    
-}
+}   
+
