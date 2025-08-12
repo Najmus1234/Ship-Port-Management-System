@@ -202,3 +202,39 @@ public class GUIShipPort extends JFrame {
     }
 }
 
+
+/*
+File f1 = new File("Person.txt");
+File f2 = new File("Ship.txt");
+File f3 = new File("Sample.txt");
+
+FileReader b1 = new FileReader(f1);
+FileReader b2 = new FileReader(f2);
+FileReader b3 = new FileReader(f3);
+
+Scanner sc1 = new Scanner(b1);
+Scanner sc1 = new Scanner(b2);
+Scanner sc1 = new Scanner(b3);
+
+while(sc1.hasNextLine())
+{
+  String s = sc1.nextLine();
+  System.out.println(s);}
+something.close;
+while(sc1.hasNextLine())    // sc2
+
+{
+  String s = sc1.nextLine();
+  System.out.println(s);}
+while(sc1.hasNextLine())
+{
+  String s = sc1.nextLine(); // sc3
+  System.out.println(s);}
+
+  
+
+
+]
+
+*/
+
