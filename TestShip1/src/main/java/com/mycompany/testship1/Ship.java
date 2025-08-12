@@ -141,6 +141,7 @@ public abstract class Ship implements FuelOperations{
     }
 
     
+    
     @Override
     public double getFuelPercentage(){
        return   (fuelRemained/fuelCapacity)*100;       
@@ -150,13 +151,18 @@ public abstract class Ship implements FuelOperations{
           System.out.println("Current Fuel Level: "+getFuelPercentage());
 }
     @Override
-    public boolean isFuelTankFull(){
-        return fuelCapacity==fuelRemained;
+    public void isFuelTankFull(){
+        if(fuelCapacity==fuelRemained)
+            System.out.println("Fuel tank is full. No need to add any fuel.");
+        else
+            System.out.println("Fuel tank is not full. You can add up to "+fuelRequiredToFill()+" liter");
     }
     
     @Override
     public void addFuel(double amount){
-        fuelRemained+=amount;
+        if((amount+fuelRemained)<= fuelCapacity)
+            fuelRemained+=amount;
+        else System.out.println("Your amount exceeds the fuel capacity. You can add up to "+fuelRequiredToFill()+" liter");
     }
     @Override
     public double calculateFuelCost(double amount, double costPerLiter){
@@ -165,6 +171,32 @@ public abstract class Ship implements FuelOperations{
     @Override
     public void showFuelCost(double amount, double costPerLiter){
         System.out.println("Fuel Cost: "+calculateFuelCost(amount, costPerLiter));
+        
+    }
+    
+    @Override
+    public void refilled()
+    {
+        fuelRemained=fuelCapacity;
+    }
+    @Override
+    public double fuelRequiredToFill(){
+        return fuelCapacity-fuelRemained;
+    }
+
+    /**
+     *
+     * @param distanceInKm
+     * @param fuelPerKm
+     */
+    @Override
+    public void findRequiredFuel(double distanceInKm, double fuelPerKm)
+    {
+        double need =fuelRemained - distanceInKm*fuelPerKm;
+        if(need>0)
+        System.out.println("You need to fill up "+need+ " liter fuel to reach your destination.");
+        else
+         System.out.println("You have enough fuel. Don't need to add any fuel for reaching your destination.");   
     }
 }
 
