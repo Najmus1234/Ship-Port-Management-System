@@ -8,7 +8,7 @@ package com.mycompany.testship1;
  *
  * @author nafis
  */
-public class Person{
+public abstract class Person{
     private String name, id, role;
    int age;
    double salary;
